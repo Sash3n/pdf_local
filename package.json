@@ -1,0 +1,16 @@
+{
+  "name": "pdf-local",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Tailwind CLI build pipeline for PDFLocal",
+  "scripts": {
+    "copy:fonts": "node scripts/copy-fonts.js",
+    "build:css": "npm run copy:fonts && tailwindcss -i ./app/static/css/input.css -o ./app/static/css/output.css --minify",
+    "watch:css": "npm run copy:fonts && tailwindcss -i ./app/static/css/input.css -o ./app/static/css/output.css --watch"
+  },
+  "devDependencies": {
+    "@fontsource/inter": "^5.2.8",
+    "material-symbols": "^0.45.5",
+    "tailwindcss": "^3.4.19"
+  }
+}

@@ -1,0 +1,17 @@
+docs/design.md
+docs/stitch/
+__pycache__/
+*.pyc
+.venv/
+venv/
+dist/
+build/
+*.spec
+instance/*.db
+.env
+node_modules/
+.coverage
+htmlcov/
+.pytest_cache/
+.ruff_cache/
+*.egg-info/

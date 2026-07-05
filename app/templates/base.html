@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en" class="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{% block title %}PDFLocal{% endblock %}</title>
+<link rel="stylesheet" href="{{ url_for('static', path='css/fonts.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', path='css/output.css') }}">
+<script>
+  (function () {
+    var stored = localStorage.getItem("pdflocal-theme");
+    var theme = stored || (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+    document.documentElement.classList.remove("light", "dark");
+    document.documentElement.classList.add(theme);
+  })();
+</script>
+</head>
+<body class="bg-background text-on-background dark:bg-on-background dark:text-background min-h-screen flex">
+<aside class="fixed left-0 top-0 h-full p-stack-md flex flex-col gap-stack-md border-r border-outline-variant/20 bg-surface-container-lowest dark:bg-inverse-surface w-64 hidden lg:flex z-50">
+  <div class="flex flex-col gap-2 mb-8 px-4">
+    <h1 class="font-headline-lg text-headline-lg font-black text-deep-indigo dark:text-inverse-on-surface">PDFLocal</h1>
+    <div class="flex items-center gap-2 text-success-teal">
+      <span class="material-symbols-outlined text-[14px]">shield</span>
+      <span class="font-label-caps text-label-caps uppercase tracking-widest">Local Processing Active</span>
+    </div>
+  </div>
+  <nav class="flex flex-col gap-1 flex-1">
+    <a class="flex items-center gap-3 px-4 py-3 bg-privacy-blue text-primary rounded-xl font-bold transition-all active:translate-x-1" href="/">
+      <span class="material-symbols-outlined">dashboard</span>
+      <span class="font-label-caps text-label-caps">Dashboard</span>
+    </a>
+    <a class="flex items-center gap-3 px-4 py-3 text-slate-gray hover:text-primary hover:bg-surface-container transition-all active:translate-x-1" href="#">
+      <span class="material-symbols-outlined">architecture</span>
+      <span class="font-label-caps text-label-caps">Tools</span>
+    </a>
+    <a class="flex items-center gap-3 px-4 py-3 text-slate-gray hover:text-primary hover:bg-surface-container transition-all active:translate-x-1" href="#">
+      <span class="material-symbols-outlined">psychology</span>
+      <span class="font-label-caps text-label-caps">Intelligence</span>
+    </a>
+    <a class="flex items-center gap-3 px-4 py-3 text-slate-gray hover:text-primary hover:bg-surface-container transition-all active:translate-x-1" href="#">
+      <span class="material-symbols-outlined">lock</span>
+      <span class="font-label-caps text-label-caps">Privacy</span>
+    </a>
+  </nav>
+  <div class="mt-auto flex flex-col gap-1 pt-4 border-t border-outline-variant/20">
+    <a class="flex items-center gap-3 px-4 py-3 text-slate-gray hover:text-primary hover:bg-surface-container transition-all" href="#">
+      <span class="material-symbols-outlined">settings</span>
+      <span class="font-label-caps text-label-caps">Settings</span>
+    </a>
+    <a class="flex items-center gap-3 px-4 py-3 text-slate-gray hover:text-primary hover:bg-surface-container transition-all" href="#">
+      <span class="material-symbols-outlined">help</span>
+      <span class="font-label-caps text-label-caps">Support</span>
+    </a>
+  </div>
+</aside>
+<main class="flex-1 lg:ml-64 min-h-screen bg-background dark:bg-on-background">
+  <header class="sticky top-0 z-40 glass-effect shadow-sm">
+    <div class="max-w-container-max mx-auto px-gutter h-20 flex justify-between items-center w-full">
+      <div class="flex items-center gap-4 flex-1">
+        <div class="relative w-full max-w-md hidden md:block">
+          <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-gray">search</span>
+          <input class="w-full bg-surface-container-low border-none rounded-full py-2 pl-10 pr-4 focus:ring-2 focus:ring-primary-container transition-all text-body-sm font-body-sm" placeholder="Search for tools..." type="text">
+        </div>
+      </div>
+      <div class="flex items-center gap-4">
+        <button class="p-2 rounded-full hover:bg-surface-container transition-colors active:scale-95" aria-label="Privacy status">
+          <span class="material-symbols-outlined">shield</span>
+        </button>
+        <button id="theme-toggle" class="p-2 rounded-full hover:bg-surface-container transition-colors active:scale-95" aria-label="Toggle dark mode">
+          <span id="theme-toggle-icon" class="material-symbols-outlined">dark_mode</span>
+        </button>
+        <div class="h-8 w-px bg-outline-variant/30 mx-2"></div>
+        <div class="flex items-center gap-3">
+          <div class="text-right hidden sm:block">
+            <p class="font-title-md text-[14px] leading-tight text-deep-indigo dark:text-inverse-on-surface">Local User</p>
+            <p class="font-label-caps text-[10px] text-slate-gray">Local Install</p>
+          </div>
+          <div class="w-10 h-10 rounded-full bg-primary-container flex items-center justify-center text-white">
+            <span class="material-symbols-outlined text-[20px]">person</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+  <div class="p-8 lg:p-12 max-w-container-max mx-auto">
+    {% block content %}{% endblock %}
+  </div>
+</main>
+<script src="{{ url_for('static', path='js/theme.js') }}"></script>
+</body>
+</html>
