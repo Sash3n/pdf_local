@@ -8,6 +8,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
+- Phase 9: Packaging - PyInstaller spec (`pdflocal.spec`) bundling templates, compiled CSS,
+  and self-hosted fonts into a standalone executable that launches a local server and opens
+  the browser automatically. Verified end-to-end on Windows (build runs, serves all routes
+  and static assets). `.github/workflows/release.yml` builds Windows/macOS/Linux artifacts
+  in a CI matrix whenever a `v*.*.*` tag is pushed; macOS/Linux builds have not been run or
+  verified locally since this environment is Windows-only.
 - Phase 8: Analytics Dashboard - SQLite `tool_runs` metrics store (SQLAlchemy), populated
   automatically by an HTTP middleware that wraps every `/api/*` POST route (no per-route
   instrumentation needed), plus a `/api/analytics/summary` endpoint and a server-rendered
