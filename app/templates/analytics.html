@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+{% block title %}PDFLocal | Analytics{% endblock %}
+{% block content %}
+<section class="mb-stack-lg">
+  <h2 class="font-headline-lg text-headline-lg text-deep-indigo dark:text-inverse-on-surface mb-2">Analytics</h2>
+  <p class="text-slate-gray font-body-lg max-w-xl">All metrics below are computed from a local SQLite database. No document content is ever stored, only run counts and timings.</p>
+</section>
+
+<section class="bg-surface-container-lowest dark:bg-inverse-surface rounded-3xl p-8 shadow-sm border border-outline-variant/10 mb-stack-md">
+  <h3 class="font-title-md text-title-md text-deep-indigo dark:text-inverse-on-surface mb-4">Most used tools</h3>
+  {% if most_used_tools %}
+  <div class="space-y-3">
+    {% for row in most_used_tools %}
+    <div class="flex items-center gap-4">
+      <span class="font-body-sm text-slate-gray w-40 truncate">{{ row.tool }}</span>
+      <div class="flex-1 bg-surface-container-low rounded-full h-3">
+        <div class="bg-primary h-3 rounded-full" style="width: {{ (row.count / most_used_tools[0].count * 100) | round(1) }}%"></div>
+      </div>
+      <span class="font-label-caps text-label-caps text-slate-gray w-10 text-right">{{ row.count }}</span>
+    </div>
+    {% endfor %}
+  </div>
+  {% else %}
+  <p class="text-slate-gray font-body-sm">No tool runs recorded yet.</p>
+  {% endif %}
+</section>
+
+<section class="bg-surface-container-lowest dark:bg-inverse-surface rounded-3xl p-8 shadow-sm border border-outline-variant/10 mb-stack-md">
+  <h3 class="font-title-md text-title-md text-deep-indigo dark:text-inverse-on-surface mb-4">Storage saved via compression</h3>
+  <p class="font-body-lg text-slate-gray">
+    {{ storage_saved.saved_bytes | filesizeformat }} saved across all Compress runs
+    ({{ storage_saved.before_bytes | filesizeformat }} to {{ storage_saved.after_bytes | filesizeformat }}).
+  </p>
+</section>
+
+<section class="bg-surface-container-lowest dark:bg-inverse-surface rounded-3xl p-8 shadow-sm border border-outline-variant/10">
+  <h3 class="font-title-md text-title-md text-deep-indigo dark:text-inverse-on-surface mb-4">Error rate per tool</h3>
+  {% if error_rate_per_tool %}
+  <table class="w-full text-left font-body-sm">
+    <thead>
+      <tr class="text-slate-gray border-b border-outline-variant/20">
+        <th class="py-2">Tool</th>
+        <th class="py-2">Runs</th>
+        <th class="py-2">Failures</th>
+        <th class="py-2">Error rate</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for row in error_rate_per_tool %}
+      <tr class="border-b border-outline-variant/10">
+        <td class="py-2">{{ row.tool }}</td>
+        <td class="py-2">{{ row.total }}</td>
+        <td class="py-2">{{ row.failures }}</td>
+        <td class="py-2">{{ row.error_rate }}%</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  {% else %}
+  <p class="text-slate-gray font-body-sm">No tool runs recorded yet.</p>
+  {% endif %}
+</section>
+{% endblock %}
