@@ -11,7 +11,7 @@ dependency permitted anywhere in this project is the local machine itself.
 |---|---|---|
 | 0 | Scaffolding (app shell, CI, build pipeline) | Done |
 | 1 | Organize PDF (Merge, Split, Remove, Extract, Organize, Scan to PDF) | Done |
-| 2 | Optimize PDF (Compress, Repair) | Not started |
+| 2 | Optimize PDF (Compress, Repair) | Done |
 | 3 | Convert to PDF (JPG, Word, PowerPoint, Excel, HTML) | Not started |
 | 4 | Convert from PDF (JPG, Word, Excel) | Not started |
 | 5 | Edit PDF (Rotate, Page numbers, Watermark, Crop, Edit) | Not started |

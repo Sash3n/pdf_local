@@ -8,6 +8,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
+- Phase 2: Optimize PDF tools - Compress (image downsampling via pikepdf/Pillow, stream
+  recompression) and Repair (pikepdf recovery with PyMuPDF fallback re-save), under
+  `/api/optimize/*`.
 - Phase 1: Organize PDF tools - Merge, Split, Remove pages, Extract pages, Organize (reorder),
   Scan to PDF (images to PDF), backed by pikepdf and Pillow, with API routes under
   `/api/organize/*` and full unit/integration test coverage.
