@@ -8,6 +8,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
+- Phase 3: Convert to PDF tools - JPG to PDF (reuses the Organize image pipeline), and a
+  LibreOffice headless bridge (`app/core/libreoffice.py`) powering Word, PowerPoint, Excel,
+  and HTML to PDF. LibreOffice is a documented manual prerequisite (see spec.md section 13);
+  routes return 503 with a clear message when `soffice` is not found on the host.
 - Phase 2: Optimize PDF tools - Compress (image downsampling via pikepdf/Pillow, stream
   recompression) and Repair (pikepdf recovery with PyMuPDF fallback re-save), under
   `/api/optimize/*`.
