@@ -8,6 +8,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
+- Phase 4: Convert from PDF tools - PDF to JPG (PyMuPDF rasterization, zipped output), PDF to
+  Word (pdf2docx), PDF to Excel (pdfplumber table extraction into openpyxl workbooks), under
+  `/api/convert-from-pdf/*`.
 - Phase 3: Convert to PDF tools - JPG to PDF (reuses the Organize image pipeline), and a
   LibreOffice headless bridge (`app/core/libreoffice.py`) powering Word, PowerPoint, Excel,
   and HTML to PDF. LibreOffice is a documented manual prerequisite (see spec.md section 13);
