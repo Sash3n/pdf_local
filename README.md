@@ -18,7 +18,7 @@ dependency permitted anywhere in this project is the local machine itself.
 | 6 | PDF Security (Unlock, Protect, Sign) | Done |
 | 7 | PDF Intelligence (PDF to Markdown) | Done |
 | 8 | Analytics Dashboard | Done |
-| 9 | Packaging (PyInstaller) | Not started |
+| 9 | Packaging (PyInstaller) | Done (Windows build verified; macOS/Linux build via CI matrix) |
 
 See `docs/spec.md` section 5 for the full roadmap.
 
@@ -45,7 +45,10 @@ pdf_local/
 
 ## Setup
 
-Requires Python 3.11+ and Node.js (for the Tailwind CLI build).
+Requires Python 3.11+ and Node.js (for the Tailwind CLI build). Optional system
+prerequisites for full functionality: LibreOffice (`soffice`) for Word/PowerPoint/Excel/HTML
+conversions, and Tesseract OCR for the OCR tool - both are documented manual installs, not
+bundled (see `docs/spec.md` section 13).
 
 ```bash
 python -m venv .venv
@@ -63,6 +66,19 @@ python -m uvicorn app.main:app --reload
 ```
 
 Visit `http://127.0.0.1:8000`.
+
+## Building the installer
+
+PDFLocal packages into a standalone executable with PyInstaller:
+
+```bash
+npm run build:css
+pyinstaller pdflocal.spec --noconfirm
+```
+
+The build lands in `dist/PDFLocal(.exe)`. It launches a local server on `127.0.0.1:8000` and
+opens your default browser automatically. `.github/workflows/release.yml` builds this on
+Windows, macOS, and Linux runners whenever a `v*.*.*` tag is pushed.
 
 ## Testing
 
