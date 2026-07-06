@@ -5,6 +5,12 @@ import uuid
 from collections.abc import Iterator
 from contextlib import contextmanager
 from pathlib import Path
+from typing import TYPE_CHECKING
+
+from fastapi.responses import Response
+
+if TYPE_CHECKING:
+    from fastapi import UploadFile
 
 _UNSAFE_CHARS = re.compile(r"[^A-Za-z0-9._-]+")
 
@@ -23,3 +29,22 @@ def temp_workspace() -> Iterator[Path]:
         yield workspace
     finally:
         shutil.rmtree(workspace, ignore_errors=True)
+
+
+async def save_uploads(files: "list[UploadFile]", workspace: Path) -> list[Path]:
+    saved = []
+    for upload in files:
+        name = sanitize_filename(upload.filename or "file")
+        path = workspace / name
+        path.write_bytes(await upload.read())
+        saved.append(path)
+    return saved
+
+
+def file_response(path: Path, filename: str, media_type: str = "application/pdf") -> Response:
+    data = path.read_bytes()
+    return Response(
+        content=data,
+        media_type=media_type,
+        headers={"Content-Disposition": f'attachment; filename="{filename}"'},
+    )
