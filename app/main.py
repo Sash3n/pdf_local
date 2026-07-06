@@ -5,7 +5,7 @@ from fastapi.responses import HTMLResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 
-from app.api import convert_from_pdf, convert_to_pdf, optimize, organize
+from app.api import convert_from_pdf, convert_to_pdf, edit, optimize, organize
 
 BASE_DIR = Path(__file__).resolve().parent
 
@@ -19,6 +19,7 @@ app.include_router(organize.router)
 app.include_router(optimize.router)
 app.include_router(convert_to_pdf.router)
 app.include_router(convert_from_pdf.router)
+app.include_router(edit.router)
 
 
 @app.get("/api/hello")

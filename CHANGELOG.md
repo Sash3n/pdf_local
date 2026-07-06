@@ -8,6 +8,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
+- Phase 5: Edit PDF tools - Rotate, Add page numbers, Add watermark, Crop, and basic text
+  insertion, all via PyMuPDF, under `/api/edit/*`.
 - Phase 4: Convert from PDF tools - PDF to JPG (PyMuPDF rasterization, zipped output), PDF to
   Word (pdf2docx), PDF to Excel (pdfplumber table extraction into openpyxl workbooks), under
   `/api/convert-from-pdf/*`.
