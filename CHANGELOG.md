@@ -8,6 +8,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
+- Phase 6: PDF Security tools - Unlock and Protect (pikepdf AES-256), drawn/typed/image
+  signatures (PyMuPDF overlay), and digital certificate (PAdES/X.509) signing via pyHanko,
+  under `/api/security/*`. Certificate signing runs in a thread pool since pyHanko's signer
+  is not natively async-compatible.
 - Phase 5: Edit PDF tools - Rotate, Add page numbers, Add watermark, Crop, and basic text
   insertion, all via PyMuPDF, under `/api/edit/*`.
 - Phase 4: Convert from PDF tools - PDF to JPG (PyMuPDF rasterization, zipped output), PDF to

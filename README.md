@@ -15,7 +15,7 @@ dependency permitted anywhere in this project is the local machine itself.
 | 3 | Convert to PDF (JPG, Word, PowerPoint, Excel, HTML) | Done (Word/PPT/Excel/HTML need LibreOffice installed) |
 | 4 | Convert from PDF (JPG, Word, Excel) | Done |
 | 5 | Edit PDF (Rotate, Page numbers, Watermark, Crop, Edit) | Done |
-| 6 | PDF Security (Unlock, Protect, Sign) | Not started |
+| 6 | PDF Security (Unlock, Protect, Sign) | Done |
 | 7 | PDF Intelligence (PDF to Markdown) | Not started |
 | 8 | Analytics Dashboard | Not started |
 | 9 | Packaging (PyInstaller) | Not started |
