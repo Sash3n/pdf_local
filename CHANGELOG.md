@@ -8,6 +8,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
+- Phase 7: PDF Intelligence - PDF to Markdown using PyMuPDF structured text extraction with
+  relative font-size heading detection and bullet list preservation, under
+  `/api/intelligence/pdf-to-markdown`.
 - Phase 6: PDF Security tools - Unlock and Protect (pikepdf AES-256), drawn/typed/image
   signatures (PyMuPDF overlay), and digital certificate (PAdES/X.509) signing via pyHanko,
   under `/api/security/*`. Certificate signing runs in a thread pool since pyHanko's signer

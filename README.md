@@ -16,7 +16,7 @@ dependency permitted anywhere in this project is the local machine itself.
 | 4 | Convert from PDF (JPG, Word, Excel) | Done |
 | 5 | Edit PDF (Rotate, Page numbers, Watermark, Crop, Edit) | Done |
 | 6 | PDF Security (Unlock, Protect, Sign) | Done |
-| 7 | PDF Intelligence (PDF to Markdown) | Not started |
+| 7 | PDF Intelligence (PDF to Markdown) | Done |
 | 8 | Analytics Dashboard | Not started |
 | 9 | Packaging (PyInstaller) | Not started |
 
