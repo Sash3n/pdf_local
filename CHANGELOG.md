@@ -8,6 +8,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
+- Phase 8: Analytics Dashboard - SQLite `tool_runs` metrics store (SQLAlchemy), populated
+  automatically by an HTTP middleware that wraps every `/api/*` POST route (no per-route
+  instrumentation needed), plus a `/api/analytics/summary` endpoint and a server-rendered
+  `/analytics` dashboard page (most-used tools, storage saved via compression, error rate
+  per tool). No document content or filenames are ever persisted, only run metadata.
 - Phase 7: PDF Intelligence - PDF to Markdown using PyMuPDF structured text extraction with
   relative font-size heading detection and bullet list preservation, under
   `/api/intelligence/pdf-to-markdown`.

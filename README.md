@@ -17,7 +17,7 @@ dependency permitted anywhere in this project is the local machine itself.
 | 5 | Edit PDF (Rotate, Page numbers, Watermark, Crop, Edit) | Done |
 | 6 | PDF Security (Unlock, Protect, Sign) | Done |
 | 7 | PDF Intelligence (PDF to Markdown) | Done |
-| 8 | Analytics Dashboard | Not started |
+| 8 | Analytics Dashboard | Done |
 | 9 | Packaging (PyInstaller) | Not started |
 
 See `docs/spec.md` section 5 for the full roadmap.
