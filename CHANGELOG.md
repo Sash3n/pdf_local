@@ -8,6 +8,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
+- Frontend: wired real pages for every tool built in Phases 1-9, replacing the placeholder
+  `href="#"` nav links left over from Phase 0. A config-driven `tool_workspace.html` template
+  (`app/core/tool_catalog.py`) renders each tool at its own URL matching the canonical Merge PDF
+  workspace fidelity (drop zone, file cards with drag-reorder, sticky action bar), with a
+  generic upload/download JS controller (`app/static/js/tool-workspace.js`,
+  `response-handler.js`) that auto-downloads binary results or previews text results (e.g.
+  Markdown) inline. Sign PDF gets a bespoke page (`sign.html`) with Draw/Upload Image/Type/
+  Certificate modes, including a canvas signature pad. Added `/tools` (index), `/security/sign`,
+  and `/privacy` (Settings/Privacy, with live LibreOffice/Tesseract detection) pages, and
+  rebuilt the Dashboard's category cards to link into real tools instead of a stale "ships in
+  the next phase" placeholder. Also fixed `/api/organize/split`, which previously returned only
+  a page count with no downloadable file - it now returns a zip of the split pages.
+
 - Phase 9: Packaging - PyInstaller spec (`pdflocal.spec`) bundling templates, compiled CSS,
   and self-hosted fonts into a standalone executable that launches a local server and opens
   the browser automatically. Verified end-to-end on Windows (build runs, serves all routes
@@ -44,3 +57,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Phase 0: project scaffolding - git workflow, directory structure, FastAPI hello-world app,
   Tailwind CLI build pipeline, base page shell with dark/light theme toggle, pytest with
   coverage reporting, GitHub Actions CI (lint, tests, security scans).
+
+### Fixed
+- Dark mode on the new frontend pages initially used light-mode-only design tokens
+  (`surface-container`/`surface-container-high`) as `dark:` variants, since DESIGN.md never
+  defines a distinct dark palette; this produced unreadable near-white-on-light-gray text.
+  Fixed by using the genuine dark tokens (`inverse-surface`/`inverse-on-surface`) established
+  in the Phase 0 shell, verified visually via a headless-browser screenshot pass.

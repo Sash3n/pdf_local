@@ -1,0 +1,124 @@
+{% extends "base.html" %}
+{% block title %}PDFLocal | Sign PDF{% endblock %}
+{% block content %}
+<div id="sign-workspace">
+
+  <div class="mb-stack-lg flex flex-col md:flex-row md:items-end justify-between gap-4">
+    <div>
+      <div class="flex items-center gap-3 text-secondary mb-2">
+        <span class="material-symbols-outlined">draw</span>
+        <span class="font-label-caps text-label-caps tracking-widest">LOCAL TOOLKIT</span>
+      </div>
+      <h2 class="font-headline-lg text-headline-lg text-primary dark:text-inverse-on-surface">Sign PDF</h2>
+      <p class="font-body-lg text-body-lg text-slate-gray max-w-2xl mt-2">Add a drawn, typed, image, or digital certificate signature. Everything runs on this machine.</p>
+    </div>
+    <div class="flex items-center gap-2 px-3 py-1.5 bg-success-teal/10 text-success-teal rounded-full">
+      <span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">lock</span>
+      <span class="font-label-caps text-[11px] font-bold">ENCRYPTED &amp; LOCAL</span>
+    </div>
+  </div>
+
+  <div class="flex flex-col gap-stack-lg">
+    <div class="relative group cursor-pointer border-2 border-dashed border-outline-variant/50 rounded-3xl p-stack-lg flex flex-col items-center justify-center min-h-[200px] bg-surface-container-low dark:bg-inverse-surface hover:bg-surface-container transition-all duration-300" id="pdf-drop-zone">
+      <div class="w-16 h-16 mb-4 bg-white dark:bg-inverse-surface rounded-2xl shadow-sm flex items-center justify-center text-secondary group-hover:scale-110 transition-transform">
+        <span class="material-symbols-outlined text-3xl">upload_file</span>
+      </div>
+      <h3 class="font-title-md text-title-md text-primary dark:text-inverse-on-surface mb-1" id="pdf-drop-label">Drop the PDF to sign here</h3>
+      <p class="font-body-sm text-slate-gray mb-4">or click to browse your local storage</p>
+      <button type="button" id="pdf-browse-btn" class="px-6 py-2.5 bg-deep-indigo text-white font-bold rounded-xl shadow-lg active:scale-95 transition-all">Select PDF</button>
+      <input id="pdf-input" accept="application/pdf" class="hidden" type="file"/>
+    </div>
+
+    <section class="bg-surface-container-lowest dark:bg-inverse-surface rounded-3xl p-8 shadow-sm border border-outline-variant/10">
+      <div class="flex flex-wrap gap-2 mb-6" id="mode-tabs">
+        <button type="button" class="mode-tab px-4 py-2 rounded-xl font-label-caps text-label-caps bg-privacy-blue text-primary" data-mode="draw">Draw</button>
+        <button type="button" class="mode-tab px-4 py-2 rounded-xl font-label-caps text-label-caps text-slate-gray hover:bg-surface-container" data-mode="image">Upload Image</button>
+        <button type="button" class="mode-tab px-4 py-2 rounded-xl font-label-caps text-label-caps text-slate-gray hover:bg-surface-container" data-mode="type">Type</button>
+        <button type="button" class="mode-tab px-4 py-2 rounded-xl font-label-caps text-label-caps text-slate-gray hover:bg-surface-container" data-mode="certificate">Certificate</button>
+      </div>
+
+      <div data-panel="draw">
+        <canvas id="sign-canvas" width="560" height="180" class="border border-outline-variant/50 rounded-2xl bg-white w-full touch-none cursor-crosshair"></canvas>
+        <button type="button" id="clear-canvas-btn" class="mt-2 text-error font-label-caps text-label-caps hover:underline">Clear</button>
+      </div>
+
+      <div data-panel="image" class="hidden">
+        <label class="block font-label-caps text-label-caps text-slate-gray mb-2">Signature image</label>
+        <input id="signature-image-input" accept="image/*" type="file" class="w-full bg-surface-container-low dark:bg-inverse-surface rounded-md py-2 px-3 text-body-sm font-body-sm"/>
+      </div>
+
+      <div data-panel="type" class="hidden">
+        <label class="block font-label-caps text-label-caps text-slate-gray mb-2" for="signature-text-input">Signature text</label>
+        <input id="signature-text-input" type="text" placeholder="Your name" class="w-full bg-surface-container-low dark:bg-inverse-surface border-none rounded-md py-2 px-3 text-body-sm font-body-sm focus:ring-2 focus:ring-primary-container"/>
+      </div>
+
+      <div data-panel="certificate" class="hidden">
+        <label class="block font-label-caps text-label-caps text-slate-gray mb-2">Certificate file (.pfx / .p12)</label>
+        <input id="pfx-input" accept=".pfx,.p12" type="file" class="w-full bg-surface-container-low dark:bg-inverse-surface rounded-md py-2 px-3 text-body-sm font-body-sm mb-4"/>
+        <label class="block font-label-caps text-label-caps text-slate-gray mb-2" for="pfx-password-input">Certificate password</label>
+        <input id="pfx-password-input" type="password" class="w-full bg-surface-container-low dark:bg-inverse-surface border-none rounded-md py-2 px-3 text-body-sm font-body-sm focus:ring-2 focus:ring-primary-container"/>
+      </div>
+
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-6" id="placement-fields" data-panel="draw image type">
+        <div>
+          <label class="block font-label-caps text-label-caps text-slate-gray mb-2">Page</label>
+          <input id="field-page" type="number" value="1" min="1" class="w-full bg-surface-container-low dark:bg-inverse-surface border-none rounded-md py-2 px-3 text-body-sm font-body-sm"/>
+        </div>
+        <div data-box-field>
+          <label class="block font-label-caps text-label-caps text-slate-gray mb-2">Left (x0)</label>
+          <input id="field-x0" type="number" value="50" class="w-full bg-surface-container-low dark:bg-inverse-surface border-none rounded-md py-2 px-3 text-body-sm font-body-sm"/>
+        </div>
+        <div data-box-field>
+          <label class="block font-label-caps text-label-caps text-slate-gray mb-2">Bottom (y0)</label>
+          <input id="field-y0" type="number" value="50" class="w-full bg-surface-container-low dark:bg-inverse-surface border-none rounded-md py-2 px-3 text-body-sm font-body-sm"/>
+        </div>
+        <div data-box-field>
+          <label class="block font-label-caps text-label-caps text-slate-gray mb-2">Right (x1)</label>
+          <input id="field-x1" type="number" value="250" class="w-full bg-surface-container-low dark:bg-inverse-surface border-none rounded-md py-2 px-3 text-body-sm font-body-sm"/>
+        </div>
+        <div data-box-field>
+          <label class="block font-label-caps text-label-caps text-slate-gray mb-2">Top (y1)</label>
+          <input id="field-y1" type="number" value="110" class="w-full bg-surface-container-low dark:bg-inverse-surface border-none rounded-md py-2 px-3 text-body-sm font-body-sm"/>
+        </div>
+        <div data-point-field class="hidden">
+          <label class="block font-label-caps text-label-caps text-slate-gray mb-2">X position</label>
+          <input id="field-x" type="number" value="50" class="w-full bg-surface-container-low dark:bg-inverse-surface border-none rounded-md py-2 px-3 text-body-sm font-body-sm"/>
+        </div>
+        <div data-point-field class="hidden">
+          <label class="block font-label-caps text-label-caps text-slate-gray mb-2">Y position</label>
+          <input id="field-y" type="number" value="50" class="w-full bg-surface-container-low dark:bg-inverse-surface border-none rounded-md py-2 px-3 text-body-sm font-body-sm"/>
+        </div>
+      </div>
+    </section>
+
+    <div class="sticky bottom-8 z-30 max-w-2xl mx-auto w-full glass-effect dark:bg-deep-indigo/90 backdrop-blur-xl rounded-3xl p-4 shadow-2xl border border-white/20 flex items-center justify-between gap-6">
+      <p class="font-title-md text-body-sm text-primary dark:text-inverse-on-surface" id="pdf-status">Select a PDF to begin</p>
+      <button type="button" id="sign-btn" disabled class="px-10 py-3.5 bg-deep-indigo text-white font-bold rounded-2xl flex items-center gap-2 active:scale-95 transition-all shadow-lg disabled:opacity-40 disabled:cursor-not-allowed">
+        <span class="material-symbols-outlined">draw</span>
+        <span id="sign-btn-label">Sign PDF</span>
+      </button>
+    </div>
+
+    <div class="hidden mt-stack-md" id="result-panel"></div>
+
+    <footer class="mt-stack-lg pt-8 border-t border-outline-variant/20 flex flex-col md:flex-row justify-between items-center gap-6 pb-20">
+      <div class="flex items-center gap-4">
+        <div class="w-10 h-10 rounded-full bg-privacy-blue flex items-center justify-center text-primary">
+          <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">security</span>
+        </div>
+        <div>
+          <p class="font-title-md text-body-sm text-primary dark:text-inverse-on-surface">Edge Privacy Guaranteed</p>
+          <p class="text-[12px] text-slate-gray">Signing happens on your machine only; nothing is uploaded anywhere.</p>
+        </div>
+      </div>
+      <div class="flex gap-6 font-label-caps text-label-caps text-slate-gray">
+        <a class="hover:text-primary transition-colors" href="/privacy">Privacy</a>
+        <a class="hover:text-primary transition-colors" href="/analytics">System Status</a>
+      </div>
+    </footer>
+  </div>
+</div>
+
+<script src="{{ url_for('static', path='js/response-handler.js') }}"></script>
+<script src="{{ url_for('static', path='js/sign-workspace.js') }}"></script>
+{% endblock %}

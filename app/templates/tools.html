@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% block title %}PDFLocal | Tools{% endblock %}
+{% block content %}
+<section class="mb-stack-lg">
+  <h2 class="font-headline-lg text-headline-lg text-deep-indigo dark:text-inverse-on-surface mb-2">Tools</h2>
+  <p class="text-slate-gray font-body-lg max-w-xl">Every tool below runs entirely on this machine. Pick one to get started.</p>
+</section>
+
+<div class="grid grid-cols-1 md:grid-cols-2 gap-gutter">
+  {% for category in categories %}
+  <div class="bg-white dark:bg-inverse-surface rounded-3xl p-8 shadow-sm border border-outline-variant/10">
+    <div class="flex items-center gap-3 mb-6">
+      <div class="w-12 h-12 rounded-xl bg-primary-container flex items-center justify-center text-white">
+        <span class="material-symbols-outlined text-[24px]">{{ category.icon }}</span>
+      </div>
+      <h3 class="font-title-md text-title-md text-deep-indigo dark:text-inverse-on-surface">{{ category.label }}</h3>
+    </div>
+    <div class="flex flex-col gap-2">
+      {% for tool in category.tools %}
+      <a href="/tools/{{ tool.slug }}" class="flex items-center justify-between p-3 rounded-xl bg-surface-container-low dark:bg-white/5 hover:bg-surface-container transition-colors">
+        <div class="flex items-center gap-3">
+          <span class="material-symbols-outlined text-primary">{{ tool.icon }}</span>
+          <span class="font-title-md text-[15px] text-deep-indigo dark:text-inverse-on-surface">{{ tool.label }}</span>
+        </div>
+        <span class="material-symbols-outlined text-slate-gray">chevron_right</span>
+      </a>
+      {% endfor %}
+      {% if category.key == "security" %}
+      <a href="/security/sign" class="flex items-center justify-between p-3 rounded-xl bg-surface-container-low dark:bg-white/5 hover:bg-surface-container transition-colors">
+        <div class="flex items-center gap-3">
+          <span class="material-symbols-outlined text-primary">draw</span>
+          <span class="font-title-md text-[15px] text-deep-indigo dark:text-inverse-on-surface">Sign PDF</span>
+        </div>
+        <span class="material-symbols-outlined text-slate-gray">chevron_right</span>
+      </a>
+      {% endif %}
+    </div>
+  </div>
+  {% endfor %}
+</div>
+{% endblock %}

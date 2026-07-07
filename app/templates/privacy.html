@@ -1,0 +1,86 @@
+{% extends "base.html" %}
+{% block title %}PDFLocal | Privacy &amp; Settings{% endblock %}
+{% block content %}
+<section class="mb-stack-lg">
+  <h2 class="font-headline-lg text-headline-lg text-deep-indigo dark:text-inverse-on-surface mb-2">Privacy &amp; Settings</h2>
+  <p class="text-slate-gray font-body-lg max-w-xl">This is a single-user local install. There is no cloud account, no subscription, and no data leaves this machine.</p>
+</section>
+
+<div class="grid grid-cols-1 md:grid-cols-2 gap-gutter">
+  <section class="bg-white dark:bg-inverse-surface rounded-3xl p-8 shadow-sm border border-outline-variant/10">
+    <h3 class="font-title-md text-title-md text-deep-indigo dark:text-inverse-on-surface mb-4">Appearance</h3>
+    <div class="flex items-center justify-between">
+      <div>
+        <p class="font-body-lg text-deep-indigo dark:text-inverse-on-surface">Theme</p>
+        <p class="font-body-sm text-slate-gray">Switch between light and dark mode.</p>
+      </div>
+      <button id="privacy-theme-toggle" class="p-3 rounded-full bg-surface-container-low dark:bg-white/5 hover:bg-surface-container transition-colors">
+        <span class="material-symbols-outlined" id="privacy-theme-icon">dark_mode</span>
+      </button>
+    </div>
+  </section>
+
+  <section class="bg-white dark:bg-inverse-surface rounded-3xl p-8 shadow-sm border border-outline-variant/10">
+    <h3 class="font-title-md text-title-md text-deep-indigo dark:text-inverse-on-surface mb-4">Local Processing Engines</h3>
+    <div class="space-y-3">
+      {% for engine in engines %}
+      <div class="flex items-center justify-between p-3 border-b border-outline-variant/10 last:border-0">
+        <div>
+          <p class="font-body-lg text-deep-indigo dark:text-inverse-on-surface">{{ engine.label }}</p>
+          <p class="font-body-sm text-slate-gray">{{ engine.description }}</p>
+        </div>
+        {% if engine.available %}
+        <span class="flex items-center gap-1 text-success-teal text-[11px] font-bold uppercase tracking-widest">
+          <span class="w-2 h-2 rounded-full bg-success-teal"></span> Available
+        </span>
+        {% else %}
+        <span class="flex items-center gap-1 text-slate-gray text-[11px] font-bold uppercase tracking-widest">
+          <span class="w-2 h-2 rounded-full bg-outline-variant"></span> Not detected
+        </span>
+        {% endif %}
+      </div>
+      {% endfor %}
+    </div>
+  </section>
+
+  <section class="bg-white dark:bg-inverse-surface rounded-3xl p-8 shadow-sm border border-outline-variant/10">
+    <h3 class="font-title-md text-title-md text-deep-indigo dark:text-inverse-on-surface mb-4">Data Retention</h3>
+    <div class="flex items-center gap-3">
+      <span class="material-symbols-outlined text-success-teal">delete_forever</span>
+      <div>
+        <p class="font-body-lg text-deep-indigo dark:text-inverse-on-surface">Delete immediately</p>
+        <p class="font-body-sm text-slate-gray">Uploaded files are processed in a temporary workspace and deleted as soon as each operation finishes, success or failure. Only run metadata (tool name, timing, status) persists locally for the Analytics dashboard - never file contents or filenames.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-white dark:bg-inverse-surface rounded-3xl p-8 shadow-sm border border-outline-variant/10">
+    <h3 class="font-title-md text-title-md text-deep-indigo dark:text-inverse-on-surface mb-4">Local Profile</h3>
+    <div class="flex items-center gap-4">
+      <div class="w-12 h-12 rounded-full bg-primary-container flex items-center justify-center text-white">
+        <span class="material-symbols-outlined">person</span>
+      </div>
+      <div>
+        <p class="font-body-lg text-deep-indigo dark:text-inverse-on-surface">Local User</p>
+        <p class="font-body-sm text-slate-gray">Local Install - no account, no subscription, no cloud sync.</p>
+      </div>
+    </div>
+  </section>
+</div>
+
+<script>
+  (function () {
+    var root = document.documentElement;
+    var toggle = document.getElementById("privacy-theme-toggle");
+    var icon = document.getElementById("privacy-theme-icon");
+    icon.textContent = root.classList.contains("dark") ? "light_mode" : "dark_mode";
+    toggle.addEventListener("click", function () {
+      var isDark = root.classList.contains("dark");
+      root.classList.remove(isDark ? "dark" : "light");
+      root.classList.add(isDark ? "light" : "dark");
+      localStorage.setItem("pdflocal-theme", isDark ? "light" : "dark");
+      icon.textContent = isDark ? "dark_mode" : "light_mode";
+    });
+  })();
+</script>
+{% endblock %}
