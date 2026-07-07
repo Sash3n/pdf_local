@@ -23,12 +23,17 @@ def test_merge_endpoint(make_pdf):
 
 
 def test_split_endpoint(make_pdf):
+    import zipfile
+    from io import BytesIO
+
     data = _pdf_bytes(make_pdf, "source.pdf", 3)
     response = client.post(
         "/api/organize/split", files={"file": ("source.pdf", data, "application/pdf")}
     )
     assert response.status_code == 200
-    assert response.json() == {"pages": 3}
+    assert response.headers["content-type"] == "application/zip"
+    with zipfile.ZipFile(BytesIO(response.content)) as zf:
+        assert len(zf.namelist()) == 3
 
 
 def test_remove_endpoint(make_pdf):

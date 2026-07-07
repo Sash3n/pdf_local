@@ -7,7 +7,132 @@
     <p class="text-slate-gray font-body-lg max-w-xl">Your documents are processed 100% locally on this machine. No data ever leaves your device.</p>
   </div>
 </section>
-<section class="bg-surface-container-lowest dark:bg-inverse-surface rounded-3xl p-8 shadow-sm border border-outline-variant/10">
-  <p class="font-body-lg text-slate-gray">Tools are on their way. Check back once the Organize PDF tools ship in the next phase.</p>
-</section>
+
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter">
+  <div class="col-span-12 lg:col-span-8 bg-white dark:bg-inverse-surface rounded-3xl p-8 shadow-sm">
+    <div class="flex items-center gap-4 mb-6">
+      <div class="w-14 h-14 rounded-2xl bg-primary-container flex items-center justify-center text-white">
+        <span class="material-symbols-outlined text-[32px]">auto_stories</span>
+      </div>
+      <h3 class="font-headline-lg text-headline-lg text-deep-indigo dark:text-inverse-on-surface">Organize</h3>
+    </div>
+    <p class="font-body-lg text-slate-gray mb-8 max-w-md">Merge, split, and reorder pages entirely on this machine.</p>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <a href="/tools/merge" class="flex items-center justify-between p-4 rounded-xl bg-surface-container-low dark:bg-white/5 hover:bg-surface-container transition-colors">
+        <div class="flex items-center gap-3">
+          <span class="material-symbols-outlined text-primary">merge</span>
+          <span class="font-title-md text-[15px] text-deep-indigo dark:text-inverse-on-surface">Merge Files</span>
+        </div>
+        <span class="material-symbols-outlined text-slate-gray">chevron_right</span>
+      </a>
+      <a href="/tools/split" class="flex items-center justify-between p-4 rounded-xl bg-surface-container-low dark:bg-white/5 hover:bg-surface-container transition-colors">
+        <div class="flex items-center gap-3">
+          <span class="material-symbols-outlined text-primary">call_split</span>
+          <span class="font-title-md text-[15px] text-deep-indigo dark:text-inverse-on-surface">Split PDF</span>
+        </div>
+        <span class="material-symbols-outlined text-slate-gray">chevron_right</span>
+      </a>
+      <a href="/tools/extract-pages" class="flex items-center justify-between p-4 rounded-xl bg-surface-container-low dark:bg-white/5 hover:bg-surface-container transition-colors">
+        <div class="flex items-center gap-3">
+          <span class="material-symbols-outlined text-primary">layers</span>
+          <span class="font-title-md text-[15px] text-deep-indigo dark:text-inverse-on-surface">Extract Pages</span>
+        </div>
+        <span class="material-symbols-outlined text-slate-gray">chevron_right</span>
+      </a>
+      <a href="/tools/remove-pages" class="flex items-center justify-between p-4 rounded-xl bg-surface-container-low dark:bg-white/5 hover:bg-surface-container transition-colors">
+        <div class="flex items-center gap-3">
+          <span class="material-symbols-outlined text-primary">delete_sweep</span>
+          <span class="font-title-md text-[15px] text-deep-indigo dark:text-inverse-on-surface">Remove Pages</span>
+        </div>
+        <span class="material-symbols-outlined text-slate-gray">chevron_right</span>
+      </a>
+    </div>
+  </div>
+
+  <div class="col-span-12 lg:col-span-4 bg-primary text-white rounded-3xl p-8 shadow-lg flex flex-col justify-between">
+    <div>
+      <div class="w-14 h-14 rounded-2xl bg-white/10 flex items-center justify-center text-white mb-6">
+        <span class="material-symbols-outlined text-[32px]">speed</span>
+      </div>
+      <h3 class="font-headline-lg text-headline-lg mb-4">Optimize</h3>
+      <p class="font-body-sm text-on-primary-container mb-8">Shrink file sizes without losing quality, or repair a damaged PDF.</p>
+    </div>
+    <div class="space-y-3">
+      <a href="/tools/compress" class="w-full flex items-center gap-4 p-4 rounded-2xl bg-white/5 hover:bg-white/10 transition-colors border border-white/10">
+        <span class="material-symbols-outlined">compress</span>
+        <div class="text-left">
+          <p class="font-title-md text-[14px]">Compress Size</p>
+          <p class="text-[12px] opacity-60">Local image downsampling</p>
+        </div>
+      </a>
+      <a href="/tools/repair" class="w-full flex items-center gap-4 p-4 rounded-2xl bg-white/5 hover:bg-white/10 transition-colors border border-white/10">
+        <span class="material-symbols-outlined">home_repair_service</span>
+        <div class="text-left">
+          <p class="font-title-md text-[14px]">Repair PDF</p>
+          <p class="text-[12px] opacity-60">Fix corrupted files</p>
+        </div>
+      </a>
+    </div>
+  </div>
+
+  <div class="col-span-12 md:col-span-6 bg-white dark:bg-inverse-surface rounded-3xl p-8 shadow-sm flex flex-col md:flex-row gap-8">
+    <div class="flex-1">
+      <div class="flex items-center gap-4 mb-6">
+        <div class="w-12 h-12 rounded-xl bg-tertiary-container flex items-center justify-center text-tertiary-fixed-dim">
+          <span class="material-symbols-outlined text-[28px]">transform</span>
+        </div>
+        <h3 class="font-title-md text-headline-lg-mobile text-deep-indigo dark:text-inverse-on-surface">Convert</h3>
+      </div>
+      <p class="font-body-sm text-slate-gray mb-6">High-fidelity conversion between PDFs and office formats.</p>
+      <div class="flex flex-wrap gap-2">
+        <a href="/tools/word-to-pdf" class="px-3 py-1 rounded-full bg-surface-container-low dark:bg-white/5 text-[12px] font-bold text-primary border border-outline-variant/10 hover:bg-surface-container">Word</a>
+        <a href="/tools/excel-to-pdf" class="px-3 py-1 rounded-full bg-surface-container-low dark:bg-white/5 text-[12px] font-bold text-primary border border-outline-variant/10 hover:bg-surface-container">Excel</a>
+        <a href="/tools/powerpoint-to-pdf" class="px-3 py-1 rounded-full bg-surface-container-low dark:bg-white/5 text-[12px] font-bold text-primary border border-outline-variant/10 hover:bg-surface-container">PPT</a>
+        <a href="/tools/jpg-to-pdf" class="px-3 py-1 rounded-full bg-surface-container-low dark:bg-white/5 text-[12px] font-bold text-primary border border-outline-variant/10 hover:bg-surface-container">JPEG</a>
+      </div>
+    </div>
+    <a href="/tools/pdf-to-jpg" class="w-full md:w-32 bg-surface-container-lowest dark:bg-inverse-surface rounded-2xl border border-dashed border-outline flex flex-col items-center justify-center p-4 hover:bg-primary-fixed/10 transition-colors">
+      <span class="material-symbols-outlined text-primary mb-2">upload_file</span>
+      <p class="text-[10px] font-bold text-center text-slate-gray">Convert from PDF</p>
+    </a>
+  </div>
+
+  <div class="col-span-12 md:col-span-6 bg-white dark:bg-inverse-surface rounded-3xl p-8 shadow-sm">
+    <div class="flex items-center gap-4 mb-6">
+      <div class="w-12 h-12 rounded-xl bg-secondary-container flex items-center justify-center text-white">
+        <span class="material-symbols-outlined text-[28px]">edit_note</span>
+      </div>
+      <h3 class="font-title-md text-headline-lg-mobile text-deep-indigo dark:text-inverse-on-surface">Edit Content</h3>
+    </div>
+    <div class="space-y-4">
+      <a href="/tools/watermark" class="flex items-center justify-between p-3 border-b border-outline-variant/20 hover:bg-surface-container-low dark:hover:bg-white/10 rounded-lg transition-colors">
+        <div class="flex items-center gap-3">
+          <span class="material-symbols-outlined text-slate-gray">water_drop</span>
+          <span class="font-body-lg text-deep-indigo dark:text-inverse-on-surface">Add Watermark</span>
+        </div>
+        <span class="material-symbols-outlined text-slate-gray">chevron_right</span>
+      </a>
+      <a href="/tools/rotate" class="flex items-center justify-between p-3 border-b border-outline-variant/20 hover:bg-surface-container-low dark:hover:bg-white/10 rounded-lg transition-colors">
+        <div class="flex items-center gap-3">
+          <span class="material-symbols-outlined text-slate-gray">rotate_right</span>
+          <span class="font-body-lg text-deep-indigo dark:text-inverse-on-surface">Rotate Pages</span>
+        </div>
+        <span class="material-symbols-outlined text-slate-gray">chevron_right</span>
+      </a>
+      <a href="/security/sign" class="flex items-center justify-between p-3 hover:bg-surface-container-low dark:hover:bg-white/10 rounded-lg transition-colors">
+        <div class="flex items-center gap-3">
+          <span class="material-symbols-outlined text-slate-gray">draw</span>
+          <span class="font-body-lg text-deep-indigo dark:text-inverse-on-surface">Sign PDF</span>
+        </div>
+        <span class="material-symbols-outlined text-slate-gray">chevron_right</span>
+      </a>
+    </div>
+  </div>
+</div>
+
+<div class="mt-stack-lg text-center">
+  <a href="/tools" class="inline-flex items-center gap-2 text-primary dark:text-inverse-on-surface font-bold hover:underline">
+    View all tools <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+  </a>
+</div>
 {% endblock %}

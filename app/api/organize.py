@@ -1,3 +1,5 @@
+import zipfile
+
 from fastapi import APIRouter, Form, UploadFile
 
 from app.core.files import file_response, save_uploads, temp_workspace
@@ -27,7 +29,11 @@ async def split(file: UploadFile):
     with temp_workspace() as workspace:
         [path] = await save_uploads([file], workspace)
         outputs = split_pdf(path, workspace / "split")
-        return {"pages": len(outputs)}
+        archive = workspace / "pages.zip"
+        with zipfile.ZipFile(archive, "w") as zf:
+            for output in outputs:
+                zf.write(output, arcname=output.name)
+        return file_response(archive, "pages.zip", media_type="application/zip")
 
 
 @router.post("/remove")
